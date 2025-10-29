@@ -1,0 +1,40 @@
+flutter_native_splash:
+  # ======================================================
+  # 🎨 Splash Background Configuration (Android ≤11 + iOS)
+  # ======================================================
+  background_image: "assets/images/splash/splash_background.png"
+  fullscreen: true
+
+  # ======================================================
+  # 🖼️ Center Logo Configuration
+  # ======================================================
+  image: "assets/images/splash/app_logo_1152-2.png"
+  image_dark: "assets/images/splash/app_logo_1152-2.png"
+
+  android_gravity: center
+  ios_content_mode: center
+
+  # ======================================================
+  # 💡 Optional Branding (App Name)
+  # ======================================================
+  branding: "assets/images/splash/app_branding_320.png"
+  branding_dark: "assets/images/splash/app_branding_320.png"
+
+  branding_mode: bottom
+  branding_bottom_padding: 58
+
+  # ======================================================
+  # 🌓 Android 12+ Specific (no images allowed)
+  # ======================================================
+  android_12:
+    color: "#2E2B5F" # 👈 background color for Android 12+
+    image: "assets/images/splash/app_logo_1152-2.png"
+    icon_background_color: "#2E2B5F" # circular background behind logo
+    branding: "assets/images/splash/app_branding_320.png"
+
+  # ======================================================
+  # 📱 Platforms
+  # ======================================================
+  android: true
+  ios: true
+  web: false

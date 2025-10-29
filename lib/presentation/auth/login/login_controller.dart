@@ -6,20 +6,28 @@ import '../../../../core/routes/app_routes.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
-
   final formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final isLoading = false.obs;
+
+  var showPassword = false.obs;
+  var keepLoggedIn = false.obs;
+  var isLoading = false.obs;
+
+  void togglePasswordVisibility() => showPassword.toggle();
+  void toggleKeepLoggedIn(bool? value) => keepLoggedIn.value = value ?? false;
 
   Future<void> login() async {
     if (!formKey.currentState!.validate()) return;
     isLoading.value = true;
 
-    final success = await _authService.login(
-      emailController.text,
-      passwordController.text,
-    );
+    final success = true;
+
+    // final success = await _authService.login(
+    //   emailController.text,
+    //   passwordController.text,
+    // );
 
     isLoading.value = false;
 

@@ -31,31 +31,32 @@ dependencies:
   flutter:
     sdk: flutter
   # Strater dependencies
-  get:
-  dio:
-  flutter_dotenv:
-  flutter_secure_storage:
-  connectivity_plus:
+  get: ^4.7.2
+  dio: ^5.9.0
+  flutter_dotenv: ^6.0.0
+  flutter_secure_storage: ^9.2.4
+  connectivity_plus: ^7.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  rename_app:
+  rename_app: ^1.6.5
+  flutter_native_splash: ^2.4.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # Unit testing dependencies
-  mockito:
-  build_runner:
-  coverage:
+  mockito: ^5.5.1
+  build_runner: ^2.10.1
+  coverage: ^1.15.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -70,7 +71,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
-    # - images/a_dot_ham.jpeg
+    - assets/
+    - assets/images/
+    - assets/images/logo/
+    - assets/images/splash/
+    - assets/images/logo/slidescout_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

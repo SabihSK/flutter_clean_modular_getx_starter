@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'login_controller.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/validators.dart';
-import '../../../presentation/widgets/custom_button.dart';
-import '../../../presentation/widgets/custom_textfield.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/routes/app_routes.dart';
+import 'login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
@@ -12,44 +11,111 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24),
+      backgroundColor: AppColors.background,
+      body: SafeArea(
         child: Center(
-          child: Form(
-            key: controller.formKey,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  AppStrings.login,
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-                const SizedBox(height: 24),
-                CustomTextField(
-                  controller: controller.emailController,
-                  hintText: AppStrings.email,
-                  validator: Validators.validateEmail,
+                Image.asset(
+                  'assets/images/logo/slidescout_logo.png',
+                  height: 100,
                 ),
                 const SizedBox(height: 12),
-                CustomTextField(
-                  controller: controller.passwordController,
-                  hintText: AppStrings.password,
-                  isPassword: true,
-                  validator: Validators.validatePassword,
-                ),
-                const SizedBox(height: 20),
-                Obx(
-                  () => CustomButton(
-                    text: controller.isLoading.value ? "Loading..." : "Login",
-                    onPressed: controller.isLoading.value
-                        ? null
-                        : controller.login,
+                const Text(
+                  'Welcome Back to SlideScout',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 12),
-                TextButton(
-                  onPressed: () => Get.toNamed('/register'),
-                  child: const Text("Create an account"),
+                const SizedBox(height: 32),
+                Form(
+                  key: controller.formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: controller.emailController,
+                        validator: Validators.validateEmail,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Obx(
+                        () => TextFormField(
+                          controller: controller.passwordController,
+                          obscureText: !controller.showPassword.value,
+                          validator: Validators.validatePassword,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: const OutlineInputBorder(),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.showPassword.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: controller.togglePasswordVisibility,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(
+                            () => Checkbox(
+                              value: controller.keepLoggedIn.value,
+                              onChanged: controller.toggleKeepLoggedIn,
+                            ),
+                          ),
+                          const Text('Keep me logged in'),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () => Get.toNamed(AppRoutes.register),
+                            child: const Text('Register'),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Obx(
+                        () => ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            minimumSize: const Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          onPressed: controller.isLoading.value
+                              ? null
+                              : controller.login,
+                          child: controller.isLoading.value
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  'Login',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () => Get.toNamed('/reset-password'),
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(color: AppColors.primary),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

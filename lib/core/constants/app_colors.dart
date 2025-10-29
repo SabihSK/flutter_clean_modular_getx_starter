@@ -1,7 +1,3 @@
-/// core/constants/app_colors.dart
-/// Defines all color constants used throughout the application.
-/// Provides a single source of truth for color references.
-
 import 'package:flutter/material.dart';
 
 class AppColors {
