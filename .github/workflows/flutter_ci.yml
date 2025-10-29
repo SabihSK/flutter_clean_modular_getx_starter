@@ -1,0 +1,46 @@
+name: Flutter CI/CD Pipeline
+
+on:
+    push:
+        branches: [main, dev]
+    pull_request:
+        branches: [main, dev]
+
+jobs:
+    build:
+        name: Analyze, Test & Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 🧭 Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: 🧰 Setup Flutter
+              uses: subosito/flutter-action@v2
+              with:
+                  flutter-version: "3.35.0"
+                  channel: "stable"
+
+            - name: 📦 Install Dependencies
+              run: flutter pub get
+
+            - name: 🔍 Analyze Code
+              run: flutter analyze
+
+            - name: 🧪 Run Tests with Coverage
+              run: flutter test --coverage
+
+            - name: 🧾 Generate Coverage Report
+              run: |
+                  sudo apt-get install lcov
+                  genhtml coverage/lcov.info -o coverage/html
+
+            - name: 📤 Upload Coverage Report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-report
+                  path: coverage/html
+
+            - name: 🏗️ Build APK (Release)
+              if: github.ref == 'refs/heads/main'
+              run: flutter build apk --release --obfuscate --split-debug-info=build/symbols
