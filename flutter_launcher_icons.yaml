@@ -1,0 +1,34 @@
+flutter_launcher_icons:
+  # ======================================================
+  # ⚙️ Platforms to generate
+  # ======================================================
+  android: "launcher_icon"
+  ios: true
+  web:
+    generate: false
+  windows:
+    generate: false
+  macos:
+    generate: false
+
+  # ======================================================
+  # 🎨 Main Icon Source
+  # ======================================================
+  # Use your prepared square logo (512x512 or higher PNG)
+  image_path: "assets/images/splash/app_logo_1152-2.png"
+
+  # ======================================================
+  # 🪄 Android Adaptive Icon
+  # ======================================================
+  # These are only used for Android 8.0+ launcher icons.
+  adaptive_icon_background: "#2E2B5F" # Solid background color or image
+  adaptive_icon_foreground: "assets/images/splash/app_icon_foreground_432.png"
+
+  # Optional: for Android 13+ themed icons
+  # adaptive_icon_monochrome: "assets/icons/app_icon_monochrome.png"
+
+  # ======================================================
+  # 📱 iOS Configuration
+  # ======================================================
+  remove_alpha_ios: true # Required by Apple guidelines
+  background_color_ios: "#2E2B5F" # Optional fallback background
