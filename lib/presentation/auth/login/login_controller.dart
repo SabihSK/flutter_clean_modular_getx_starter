@@ -8,8 +8,8 @@ class LoginController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
   final formKey = GlobalKey<FormState>();
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final emailController = TextEditingController(text: 'sabih.sk1@gmail.com');
+  final passwordController = TextEditingController(text: '@Password123');
 
   var showPassword = false.obs;
   var keepLoggedIn = false.obs;

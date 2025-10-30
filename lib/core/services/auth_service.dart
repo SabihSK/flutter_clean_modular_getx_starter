@@ -38,9 +38,9 @@ class AuthService extends GetxService {
 
   /// Try auto-login based on saved token
   Future<void> tryAutoLogin() async {
-    final token = await _storage.readToken();
+    final token = await _storage.getToken();
     debugPrint("🔐 Token from storage: $token");
-    if (token!= null && token.isNotEmpty) {
+    if (token != null && token.isNotEmpty) {
       _isLoggedIn.value = true;
     } else {
       _isLoggedIn.value = false;

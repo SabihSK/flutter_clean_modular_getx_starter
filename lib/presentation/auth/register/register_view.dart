@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_modular_getx_starter/presentation/widgets/base_scaffold.dart';
 import 'package:get/get.dart';
 import 'register_controller.dart';
 import '../../../../core/utils/validators.dart';
@@ -11,7 +12,7 @@ class RegisterView extends GetView<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseScaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Center(
@@ -41,14 +42,14 @@ class RegisterView extends GetView<RegisterController> {
                 CustomTextField(
                   controller: controller.passwordController,
                   hintText: AppStrings.password,
-                  isPassword: true,
+                  obscureText: true,
                   validator: Validators.validatePassword,
                 ),
                 const SizedBox(height: 12),
                 CustomTextField(
                   controller: controller.confirmPasswordController,
                   hintText: AppStrings.confirmPassword,
-                  isPassword: true,
+                  obscureText: true,
                   validator: (v) => Validators.validateConfirmPassword(
                     v,
                     controller.passwordController.text,

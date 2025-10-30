@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_modular_getx_starter/presentation/widgets/base_scaffold.dart';
+import 'package:flutter_clean_modular_getx_starter/presentation/widgets/custom_button.dart';
 import 'package:get/get.dart';
+import '../widgets/theme_selector.dart';
 import 'home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -7,22 +10,32 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BaseScaffold(
       appBar: AppBar(title: const Text("Home")),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Welcome, ${controller.username}!",
-              style: Theme.of(context).textTheme.displayMedium,
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: controller.logout,
-              child: const Text("Logout"),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Obx(
+                () => Text(
+                  controller.username.value.isNotEmpty
+                      ? 'Welcome, ${controller.username.value}!'
+                      : 'Loading...',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+              const SizedBox(height: 16),
+              ThemeSelector(),
+              const SizedBox(height: 16),
+              CustomButton(
+                text: "Logout",
+                onPressed: () {
+                  controller.logout();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

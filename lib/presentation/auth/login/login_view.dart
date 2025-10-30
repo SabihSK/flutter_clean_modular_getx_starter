@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_modular_getx_starter/presentation/widgets/base_scaffold.dart';
 import 'package:get/get.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/routes/app_routes.dart';
+import '../../widgets/custom_textfield.dart';
 import 'login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -10,8 +12,7 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
+    return BaseScaffold(
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -26,34 +27,27 @@ class LoginView extends GetView<LoginController> {
                 const SizedBox(height: 12),
                 const Text(
                   'Welcome Back to SlideScout',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 32),
                 Form(
                   key: controller.formKey,
                   child: Column(
                     children: [
-                      TextFormField(
+                      CustomTextField(
                         controller: controller.emailController,
                         validator: Validators.validateEmail,
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          border: OutlineInputBorder(),
-                        ),
+                        decoration: const InputDecoration(labelText: 'Email'),
+                        hintText: 'email@example.com',
                       ),
                       const SizedBox(height: 16),
                       Obx(
-                        () => TextFormField(
+                        () => CustomTextField(
                           controller: controller.passwordController,
                           obscureText: !controller.showPassword.value,
                           validator: Validators.validatePassword,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            border: const OutlineInputBorder(),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 controller.showPassword.value
@@ -63,6 +57,7 @@ class LoginView extends GetView<LoginController> {
                               onPressed: controller.togglePasswordVisibility,
                             ),
                           ),
+                          hintText: 'Password',
                         ),
                       ),
                       const SizedBox(height: 8),

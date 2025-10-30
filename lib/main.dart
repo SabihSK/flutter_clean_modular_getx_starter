@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'core/bindings/initial_binding.dart';
 import 'core/constants/app_config.dart';
 import 'core/routes/app_pages.dart';
+import 'core/services/theme_controller.dart';
 import 'core/theme/app_theme.dart';
 import 'config/environment.dart';
 
@@ -26,33 +27,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: AppConfig.appName,
-      debugShowCheckedModeBanner: false,
+    final themeController = Get.find<ThemeController>();
+    return Obx(
+      () => GetMaterialApp(
+        title: AppConfig.appName,
+        debugShowCheckedModeBanner: false,
 
-      // ✅ Initial dependency injection
-      initialBinding: InitialBinding(),
+        // ✅ Initial dependency injection
+        initialBinding: InitialBinding(),
 
-      // ✅ Route configuration
-      getPages: AppPages.pages,
-      initialRoute: AppPages.initial,
+        // ✅ Route configuration
+        getPages: AppPages.pages,
+        initialRoute: AppPages.initial,
 
-      // ✅ Theming
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+        // ✅ Theming
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: themeController.themeMode,
 
-      // ✅ Localization-ready (placeholder)
-      locale: const Locale('en', 'US'),
+        // ✅ Localization-ready (placeholder)
+        locale: const Locale('en', 'US'),
 
-      // ✅ Global error fallback
-      unknownRoute: AppPages.unknownRoute,
+        // ✅ Global error fallback
+        unknownRoute: AppPages.unknownRoute,
 
-      // ✅ Transition animations (default)
-      defaultTransition: Transition.fadeIn,
+        // ✅ Transition animations (default)
+        defaultTransition: Transition.fadeIn,
 
-      // ✅ Log only in debug mode
-      enableLog: !AppConfig.isRelease,
+        // ✅ Log only in debug mode
+        enableLog: !AppConfig.isRelease,
+      ),
     );
   }
 }

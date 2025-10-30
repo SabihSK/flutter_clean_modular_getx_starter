@@ -1,8 +1,5 @@
 import 'package:get/get.dart';
 
-import '../../presentation/splash/splash_view.dart';
-import '../../presentation/splash/splash_binding.dart';
-
 import '../../presentation/auth/login/login_view.dart';
 import '../../presentation/auth/login/login_binding.dart';
 
@@ -17,16 +14,10 @@ import 'app_routes.dart';
 
 class AppPages {
   // ✅ Initial route (splash by default)
-  static const String initial = AppRoutes.splash;
+  static const String initial = AppRoutes.login;
 
   // ✅ Route Definitions
   static final List<GetPage> pages = [
-    GetPage(
-      name: AppRoutes.splash,
-      page: () => const SplashView(),
-      binding: SplashBinding(),
-      transition: Transition.fadeIn,
-    ),
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginView(),
